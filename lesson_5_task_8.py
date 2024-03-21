@@ -10,23 +10,15 @@ options = webdriver.ChromeOptions()
 options.headless = True
 options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
-def login_chrome(username: str, password: str):
-    driver = webdriver.Chrome(options=options)
+def login(driver, username: str, password: str):
     driver.get('http://the-internet.herokuapp.com/login')
     driver.find_element(By.ID, 'username').send_keys(username)
     driver.find_element(By.ID, "password").send_keys(password)    
     driver.find_element(By.CSS_SELECTOR, ".radius").click()    
     driver.quit()
 
-
-def login_fox(username: str, password: str):
-    driver = webdriver.Firefox()
-    driver.get('http://the-internet.herokuapp.com/login')
-    driver.find_element(By.ID, 'username').send_keys(username)
-    driver.find_element(By.ID, "password").send_keys(password)    
-    driver.find_element(By.CSS_SELECTOR, ".radius").click()    
-    driver.quit()
+chrome = webdriver.Chrome(options=options)
+ff = webdriver.Firefox()
     
-
-login_chrome('tomsmith', 'SuperSecretPassword!')
-login_fox('tomsmith', 'SuperSecretPassword!')
+login(chrome, 'tomsmith', 'SuperSecretPassword!')
+login(ff, 'tomsmith', 'SuperSecretPassword!')

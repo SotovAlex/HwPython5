@@ -9,22 +9,16 @@ options = webdriver.ChromeOptions()
 options.headless = True
 options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
-def wait_clickable_element_chrome(element: str):
-    driver = webdriver.Chrome(options=options)
+def wait_clickable_element(driver, element: str):
     driver.get('http://the-internet.herokuapp.com/entry_ad')
     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, element))).click()
     driver.quit()
 
+chrome = webdriver.Chrome(options=options)
+ff = webdriver.Firefox()
 
-def wait_clickable_element_fox(element: str):
-    driver = webdriver.Firefox()
-    driver.get('http://the-internet.herokuapp.com/entry_ad')
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, element))).click()
-    driver.quit()
-
-
-wait_clickable_element_chrome ('div.modal-footer')
-wait_clickable_element_fox ('div.modal-footer')
+wait_clickable_element(chrome, 'div.modal-footer')
+wait_clickable_element(ff, 'div.modal-footer')
 
 
 

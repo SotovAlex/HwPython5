@@ -7,8 +7,7 @@ options = webdriver.ChromeOptions()
 options.headless = True
 options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
-def click_blue_button_chrome(times: int):
-    driver = webdriver.Chrome(options=options)
+def click_blue_button(driver, times: int):
     driver.get('http://uitestingplayground.com/classattr')
     for x in range(0, times):    
         driver.find_element(By.CSS_SELECTOR, 'button.btn-primary').click()
@@ -16,16 +15,8 @@ def click_blue_button_chrome(times: int):
         driver.refresh()
     driver.quit()
 
+chrome = webdriver.Chrome(options=options)
+ff = webdriver.Firefox()
 
-def click__blue_button_fox(times: int):
-    driver = webdriver.Firefox()
-    driver.get('http://uitestingplayground.com/classattr')
-    for x in range(0, 3):    
-        driver.find_element(By.CSS_SELECTOR, 'button.btn-primary').click()
-        Alert(driver).accept()
-        driver.refresh()
-    driver.quit()
-
-
-click_blue_button_chrome(3)
-click__blue_button_fox(3)
+click_blue_button(chrome, 3)
+click_blue_button(ff, 3)

@@ -10,8 +10,7 @@ options = webdriver.ChromeOptions()
 options.headless = True
 options.add_experimental_option("excludeSwitches", ["enable-logging"])
 
-def input_2_value_chrome(value1, value2, locator):
-    driver = webdriver.Chrome(options=options)
+def input_2_value(driver, value1, value2, locator):
     driver.get('http://the-internet.herokuapp.com/inputs')
     input = driver.find_element(By.CSS_SELECTOR, locator)
     input.send_keys(value1)    
@@ -19,15 +18,8 @@ def input_2_value_chrome(value1, value2, locator):
     input.send_keys(value2)    
     driver.quit()
 
-def input_2_value_fox(value1, value2, locator):
-    driver = webdriver.Firefox()
-    driver.get('http://the-internet.herokuapp.com/inputs')
-    input = driver.find_element(By.CSS_SELECTOR, locator)
-    input.send_keys(value1)    
-    input.clear()    
-    input.send_keys(value2)
-    driver.quit()
-    
+chrome = webdriver.Chrome(options=options)
+ff = webdriver.Firefox()
 
-input_2_value_chrome (1000, 999, 'input')
-input_2_value_fox (1000, 999, 'input')
+input_2_value(chrome, 1000, 999, 'input')
+input_2_value(ff, 1000, 999, 'input')
